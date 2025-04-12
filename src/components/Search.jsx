@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./search.module.css";
 const url = "https://api.spoonacular.com/recipes/complexSearch";
-const API_KEY = "41d76fe281b647d1a163a9ee77ed6f1f";
+const API_KEY = import.meta.env.VITE_API_KEY;
 export default function Search({setFoodData}) {
     const[query,setQuery] = useState("pizza");
     useEffect(()=>{
