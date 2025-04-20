@@ -4,6 +4,7 @@ const url = "https://api.spoonacular.com/recipes/complexSearch";
 const API_KEY = import.meta.env.VITE_API_KEY;
 export default function Search({setFoodData}) {
     const[query,setQuery] = useState("pizza");
+    const[term,setTerm] = useState("pizza");
     useEffect(()=>{
       async function fetchFood(){
         const res = await fetch(`${url}?query=${query}&apiKey=${API_KEY}`)
@@ -12,10 +13,13 @@ export default function Search({setFoodData}) {
         setFoodData(data.results)
       }
       fetchFood()
-    },[query])
+    },[term])
   function handleChange(e) {
     e.preventDefault();
     setQuery(e.target.value)
+  }
+  function handleClick(){
+    setTerm(query)
   }
   return (
     <div className={Styles.searchContainer}>
@@ -24,7 +28,7 @@ export default function Search({setFoodData}) {
         type="text"
         value={query}
       />
-      <button>Search</button>
+      <button onClick={()=>handleClick()}>Search</button>
     </div>
   );
 }
